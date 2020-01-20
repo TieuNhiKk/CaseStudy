@@ -1,0 +1,250 @@
+{
+  "Drugs": [
+    {
+      "id": 1,
+      "Name": "Paracetamol",
+      "Dose": "200",
+      "Origin": "Demesco",
+      "Buy": "10000",
+      "Sell": "12000",
+      "Amounts": "2000",
+      "ExpryDate": "2020-10-20",
+      "WareHouse": {
+        "id": "2",
+        "wh": "B"
+      },
+      "Type": {
+        "id": "1",
+        "type": "Pill"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "1",
+        "unit": "mg"
+      }
+    },
+    {
+      "id": 2,
+      "Name": "Oresol",
+      "Dose": "100",
+      "Origin": "Oresol inc",
+      "Buy": "1800",
+      "Sell": "2000",
+      "Amounts": "2000",
+      "ExpryDate": "2020-01-25",
+      "WareHouse": {
+        "id": "1",
+        "wh": "A"
+      },
+      "Type": {
+        "id": "3",
+        "type": "Powder"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "1",
+        "unit": "mg"
+      }
+    },
+    {
+      "Name": "Penicillamin",
+      "Dose": "200",
+      "Unit": {
+        "id": 1,
+        "unit": "mg"
+      },
+      "Origin": "Long Châu",
+      "Buy": "10000",
+      "Sell": "12000",
+      "Amounts": "2000",
+      "ExpryDate": "2020-01-20",
+      "id": 3,
+      "WareHouse": {
+        "id": "3",
+        "wh": "C"
+      },
+      "Type": {
+        "id": "1",
+        "type": "Pill"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      }
+    },
+    {
+      "id": 4,
+      "Name": "Prednisolon",
+      "Dose": "200",
+      "Origin": "Nam Ha pharmacy ",
+      "Buy": "500",
+      "Sell": "1000",
+      "Amounts": "10000",
+      "ExpryDate": "2020-01-20",
+      "WareHouse": {
+        "id": "1",
+        "wh": "A"
+      },
+      "Type": {
+        "id": "1",
+        "type": "Pill"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "1",
+        "unit": "mg"
+      }
+    },
+    {
+      "id": 5,
+      "Name": "Aspirin",
+      "Dose": "100",
+      "Origin": "Truong Tho pharmacy",
+      "Buy": "12000",
+      "Sell": "13000",
+      "Amounts": "1000",
+      "ExpryDate": "2020-01-20",
+      "WareHouse": {
+        "id": "1",
+        "wh": "A"
+      },
+      "Type": {
+        "id": "1",
+        "type": "Pill"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "1",
+        "unit": "mg"
+      }
+    },
+    {
+      "id": 6,
+      "Name": "Nifedipin",
+      "Dose": "10",
+      "Origin": "Nam Ha pharmacy ",
+      "Buy": "12000",
+      "Sell": "14000",
+      "Amounts": "1000",
+      "ExpryDate": "2020-01-20",
+      "WareHouse": {
+        "id": "1",
+        "wh": "A"
+      },
+      "Type": {
+        "id": "1",
+        "type": "Pill"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "1",
+        "unit": "mg"
+      }
+    },
+    {
+      "id": 7,
+      "Name": "Methotrexate",
+      "Dose": "25",
+      "Origin": "BD Phamacy",
+      "Buy": "20000",
+      "Sell": "21000",
+      "Amounts": "1000",
+      "ExpryDate": "2020-01-20",
+      "WareHouse": {
+        "id": "1",
+        "wh": "A"
+      },
+      "Type": {
+        "id": "2",
+        "type": "Siro"
+      },
+      "Status": {
+        "id": "1",
+        "stt": "Available"
+      },
+      "Unit": {
+        "id": "3",
+        "unit": "ml"
+      }
+    }
+  ],
+  "WareHouses": [
+    {
+      "id": 1,
+      "wh": "A"
+    },
+    {
+      "id": 2,
+      "wh": "B"
+    },
+    {
+      "id": 3,
+      "wh": "C"
+    },
+    {
+      "id": 4,
+      "wh": "D"
+    }
+  ],
+  "Types": [
+    {
+      "id": 1,
+      "type": "Pill"
+    },
+    {
+      "id": 2,
+      "type": "Siro"
+    },
+    {
+      "id": 3,
+      "type": "Powder"
+    }
+  ],
+  "Status": [
+    {
+      "id": 1,
+      "stt": "Available"
+    },
+    {
+      "id": 2,
+      "stt": "Unavailable"
+    },
+    {
+      "id": 3,
+      "stt": "Expire"
+    }
+  ],
+  "Units": [
+    {
+      "id": 1,
+      "unit": "mg"
+    },
+    {
+      "id": 2,
+      "unit": "g"
+    },
+    {
+      "id": 3,
+      "unit": "ml"
+    },
+    {
+      "id": 4,
+      "unit": "UI"
+    }
+  ]
+}

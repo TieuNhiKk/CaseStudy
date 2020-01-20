@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Libs/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Libs/node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Products Management</title>
+</head>
+<body>
+    <div class="container">
+        <h4>Drugs Management</h4>
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a href="javascript:void(0);" class="btn btn-success" onclick="product.openModal()">Add Drug</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" id="searchName" type="search" placeholder="Search"
+                    aria-label="Search">
+            </form>
+        </nav>
+        <div class="row mt-5">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ON</th>
+                        <th>Drug Name</th>
+                        <th>Dose</th>
+                        <th>Unit</th>
+                        <th>W.H</th>
+                        <th>Type</th>
+                        <th>Origin</th>
+                        <th>Buy</th>
+                        <th>Sell</th>
+                        <th>Amount</th>
+                        <th>Expry Date</th>
+                        <th>Status</th>
+                        <th class="mr-1">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="showDrugs">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="addEditdrug">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="update">Add Drug</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="formAddEditdrug">
+                        <input hidden name="id" id="id" value="0">
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="text" name="getName" id="getName" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Dose</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="text" name="getDose" id="getDose" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Unit</label>
+                            </div>
+                            <div class="col-9">
+                                <select class="form-control" name="getUnit" id="getUnit" required></select>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>WareHouse</label>
+                            </div>
+                            <div class="col-9">
+                                <select class="form-control" name="getWare" id="getWare" required></select>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Type</label>
+                            </div>
+                            <div class="col-9">
+                                <select class="form-control" name="getType" id="getType" required></select>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Origin</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="text" name="getOrigin" id="getOrigin" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Buy</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="text" name="getBuy" id="getBuy" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Sell</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="text" name="getSell" id="getSell" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Amounts</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" name="getAmount" id="getAmount" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group">
+                            <div class="col-3">
+                                <label>Expry Date</label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" type="date" name="getEXP" id="getEXP" required>
+                            </div>
+                        </div>
+                        <div class="row  form-group" id="setStatus" hidden>
+                            <div class="col-3">
+                                <label>Status</label>
+                            </div>
+                            <div class="col-9">
+                                <select class="form-control" name="getStatus" id="getStatus" required></select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="product.save()">Save</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="Libs/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="Libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="Libs/node_modules/bootbox/dist/bootbox.min.js"></script>
+<script src="Libs/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="script.js"></script>
+</html>
