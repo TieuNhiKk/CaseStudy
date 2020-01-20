@@ -5,9 +5,9 @@
       "Name": "Paracetamol",
       "Dose": "200",
       "Origin": "Demesco",
-      "Buy": "10000",
+      "Buy": "12000",
       "Sell": "12000",
-      "Amounts": "2000",
+      "Amounts": "10000",
       "ExpryDate": "2020-10-20",
       "WareHouse": {
         "id": "2",
