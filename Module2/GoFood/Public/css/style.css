@@ -1,0 +1,94 @@
+#logohome {
+    border-radius: 50%;
+    width: 5em;
+    height: 2.5em;
+}
+
+#price {
+    background-color: teal;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0% {
+        background-color: red
+    }
+
+    25% {
+        background-color: yellow
+    }
+
+    50% {
+        background-color: dodgerblue
+    }
+
+    75% {
+        background-color: grey
+    }
+
+    100% {
+        background-color: green
+    }
+}
+
+#card {
+    margin: 0;
+    padding: 0;
+    min-height: max-content;
+    background-color: honeydew;
+}
+
+
+#imgcard {
+    height: 15em;
+}
+
+#useravatar {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+/* Thanh tìm kiếm */
+#myInput {
+    width: 564px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    height: 42px;
+    margin-right: 101px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.bg-light {
+    background-color: #022e35 !important;
+}
+
+input[type="file"] {
+
+    padding-top: 3px !important;
+    border-top-width: 0px !important;
+    border-bottom-width: 0px !important;
+    border-right-width: 0px !important;
+    border-left-width: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+i.fas {
+    font-size: 24px !important;
+    width: 90px !important;
+    height: 20px !important;
+    margin-block-start: initial !important;
+    margin: inherit !important
+}
+/* 
+#buy,#add{
+    width: 3em;
+    margin: 0 auto;
+} */

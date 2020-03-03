@@ -1,0 +1,5 @@
+{
+    "autoload": {
+        "classmap": ["./", "Core/", "Controllers/","Core/Model/","Core/Database/"]
+    }
+}
