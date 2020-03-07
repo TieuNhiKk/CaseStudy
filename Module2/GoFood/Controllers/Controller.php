@@ -15,8 +15,7 @@ class HomePage
     public function home()
     {
         $index = new Foods;
-        $foods = $index->show();
-        $pages = $index->getPage();
+        $foods = $index->get();
         $types = Foods::$categories;
         $id = null;
         if (isset($_GET['type'])) {
@@ -24,14 +23,14 @@ class HomePage
             $id = $_GET['type'];
         }
         // require "test.php";
-        if (isset($_SESSION['login']) && isset($_GET['admin'])) {
-            if ($_SESSION['login']->access == 2) {
-                require "views/index.edit.php";
+        if (isset($_SESSION['user']) && isset($_GET['admin'])) {
+            if ($_SESSION['user']->access == 2) {
+                require "./views/index.edit.php";
             } else {
-                require "views/index.view.php";
+                require "./views/index.view.php";
             }
         } else {
-            require "views/index.view.php";
+            require "./views/index.view.php";
         }
     }
 
@@ -41,13 +40,22 @@ class HomePage
 
     public function addFood()
     {
-        die(var_dump($_GET));
-        $name = $_POST['name4'];
-        $avatar = Apps::uploadImg($_FILES['avatar4']);
-        $price = $_POST['price4'];
-        $type = $_POST['type4'];
-        Foods::addFood([$name, $avatar, $price, $type]);
-        header("location:/");
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $_GET['admin'] = 1;
+                $name = $_POST['name'];
+                $avatar = Apps::uploadImg($_FILES['avatar']);
+                $price = $_POST['price'];
+                $type = $_POST['type'];
+                Foods::addFood([$name, $avatar, $price, $type]);
+
+                echo "Thêm thành công";
+            }
+            $this->home();
+        } catch (\Exception $e) {
+            echo "Lỗi " . $e->getMessage();
+            $this->home();
+        }
     }
 
     /**
@@ -56,18 +64,25 @@ class HomePage
 
     public function editFood()
     {
+
+
         try {
-            $data = [
-                $_POST['name3'],
-                Apps::uploadImg($_FILES['avatar3']),
-                $_POST['price3'],
-                $_POST['type3']
-            ];
-            Foods::update($data, $_POST['id']);
-            header("location:/");
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $_GET['admin'] = 1;
+                $data = [
+                    $_POST['name'],
+                    Apps::uploadImg($_FILES['avatar']),
+                    $_POST['price'],
+                    $_POST['type']
+                ];
+                Foods::update($data, $_POST['id']);
+                echo "Chỉnh sửa thành công";
+            }
+
+            $this->home();
         } catch (\Exception $e) {
-            $food = Foods::search($_POST['id']);
-            header("location:/");
+            echo "Lỗi " . $e->getMessage();
+            $this->home();
         }
     }
 
@@ -77,9 +92,18 @@ class HomePage
 
     public function deleteFood()
     {
-        // die(var_dump($_POST['id']));
-        Foods::delete($_POST['id']);
-        header("location:/");
+
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $_GET['admin'] = 1;
+                Foods::delete($_POST['id']);
+                echo "Xóa thành công";
+            }
+            $this->home();
+        } catch (\Exception $e) {
+            echo "Lỗi " . $e->getMessage();
+            $this->home();
+        }
     }
 
     /**
@@ -88,14 +112,16 @@ class HomePage
 
     public function signIn()
     {
-        $phone = $_POST['phone1'];
-        $pass = $_POST['password1'];
-        Users::signIn($phone, $pass);
-        if (isset($_SESSION['login'])) {
-            header("location:/");
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                Users::signIn($_POST['phone'], $_POST['password']);
+                echo "Đăng nhập thành công";
+            }
+            $this->home();
+        } catch (\Exception $e) {
+            echo "Lỗi " . $e->getMessage();
+            $this->home();
         }
-        echo "Thất bại";
-        header("location:/");
     }
 
     /**
@@ -104,17 +130,24 @@ class HomePage
 
     public function signUp()
     {
-        $infor = [
-            $_POST['name2'],
-            // $_POST['avatar'],
-            $_POST['phone2'],
-            $_POST['email2'],
-            $_POST['address2'],
-            $_POST['password2']
-        ];
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $infor = [
+                    $_POST['name'],
+                    $_POST['phone'],
+                    $_POST['email'],
+                    $_POST['address'],
+                    $_POST['password']
+                ];
+                Users::signUp($infor);
+                echo "Đăng ký thành công";
+            }
 
-        Users::signUp($infor);
-        header("location:/");
+            $this->home();
+        } catch (\Exception $e) {
+            echo "Lỗi " . $e->getMessage();
+            $this->home();
+        }
     }
 
     /**
@@ -123,24 +156,44 @@ class HomePage
 
     public function userUpdate()
     {
-        $data = [
-            $_POST['name5'],
-            Apps::uploadImg($_FILES['avatar5']),
-            $_POST['phone5'],
-            $_POST['email5'],
-            $_POST['address5'],
-            $_POST['password5']
-        ];
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $data = [
+                    $_POST['name'],
+                    $_POST['phone'],
+                    $_POST['email'],
+                    $_POST['address'],
+                    $_POST['password']
+                ];
 
-        Users::userUpdate($data, $_SESSION['login']->id);
-        header('location:/');
+                Users::userUpdate($data, $_SESSION['user']->id);
+                echo "Cập nhật thành công";
+            }
+
+            $this->home();
+        } catch (\Exception $e) {
+            echo "lỗi " . $e->getMessage();
+            $this->home();
+        }
     }
 
     public function logOut()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            Users::signOut();
+        try {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                Users::signOut();
+            }
+
+            $this->home();
+        } catch (\Exception $e) {
+            echo "lỗi " . $e->getMessage();
+            $this->home();
         }
-        header("location:/");
     }
+}
+
+
+function dd($ad)
+{
+    return die(var_dump($ad));
 }

@@ -21,14 +21,14 @@ class Foods
      * @return Array  Trả về mảng các sản phẩm
      */
 
-    public function show()
+    public function get()
     {
         $sql = "SELECT `foods`.id, `foods`.name, `foods`.avatar, `foods`.price, `categories`.name AS type
                 FROM `foods`
                 INNER JOIN `categories`
                 ON `foods`.type = `categories`.id";
 
-        return QueryDB::show($sql);
+        return QueryDB::get($sql);
     }
 
     /**
@@ -38,7 +38,7 @@ class Foods
      *@return signIn user hoặc trả về lỗi
      */
 
-    public static function addFood($infor)
+    public function addFood($infor)
     {
         $data = [
             'name' => "'{$infor[0]}'",
@@ -99,10 +99,5 @@ class Foods
     public static function search($id)
     {
         return QueryDB::search('foods', "`id` = {$id}")[0];
-    }
-
-    public static function getPage()
-    {
-        return QueryDB::pagenation('foods');
     }
 }

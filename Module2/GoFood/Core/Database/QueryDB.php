@@ -26,7 +26,11 @@ class QueryDB
 
     public static function selectAll($table)
     {
-        return self::$pdo->query("SELECT * FROM {$table}")->fetchAll(PDO::FETCH_CLASS);
+        try {
+            return self::$pdo->query("SELECT * FROM {$table}")->fetchAll(PDO::FETCH_CLASS);
+        } catch (PDOException $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ class QueryDB
             $sql = "SELECT {$fiels} FROM {$table} WHERE {$cond}";
             return self::$pdo->query($sql)->fetchAll(PDO::FETCH_CLASS);
         } catch (PDOException $e) {
-            die($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -89,7 +93,7 @@ class QueryDB
 
             self::$pdo->query("INSERT INTO `{$table}` ({$cols}) VALUE ({$values})");
         } catch (PDOException $e) {
-            die($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -110,7 +114,7 @@ class QueryDB
                 self::$pdo->query("UPDATE `{$table}` SET `{$col}` = {$value} WHERE `id` = {$id}");
             }
         } catch (PDOException $e) {
-            die($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -128,20 +132,19 @@ class QueryDB
         try {
             self::$pdo->query("DELETE FROM `{$table}` WHERE `id` = {$id}");
         } catch (PDOException $e) {
-            die($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
-    public static function show($sql)
+    public static function get($sql)
     {
-        return self::$pdo->query($sql)->fetchAll(PDO::FETCH_CLASS);
+        try {
+            return self::$pdo->query($sql)->fetchAll(PDO::FETCH_CLASS);
+        } catch (PDOException $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
     /**
      * Phân trang, số lượng phần tử của trang
      */
-
-    public static function pagenation($table)
-    {
-       return self::$pdo->query("SELECT count(*) FROM `$table`")->fetch()[0];
-    }
 }

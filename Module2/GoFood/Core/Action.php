@@ -19,7 +19,7 @@ class Action
                 return $home->$uri();
             }
         }
-
+        // die('hello');
         return HomePage::home();
     }
 }

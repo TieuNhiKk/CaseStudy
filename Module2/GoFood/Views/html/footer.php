@@ -35,12 +35,25 @@
     </div>
 </footer>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-<script src="/Public/js/script.js"></script>
-<script src="/Public/Libs/jquery.min.js"></script>
-<script src="/Public/Libs/fontawesome.min.js"></script>
-<script src="/Public/Libs/bootbox.min.js"></script>
-<script src="/Public/Libs/font.js"></script>
-<script src="/Public/Libs/bootstrap.bundle.min.js"></script>
+            reader.onload = function(e) {
+                $('#avatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="./Public/Libs/font.js"></script>
+<script src="./Public/js/script.js"></script>
 
 </html>

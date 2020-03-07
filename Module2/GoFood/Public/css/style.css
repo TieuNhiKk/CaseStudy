@@ -6,12 +6,12 @@
 
 #price {
     background-color: teal;
-    animation-name: example;
+    animation-name: price;
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
 
-@keyframes example {
+@keyframes price {
     0% {
         background-color: red
     }

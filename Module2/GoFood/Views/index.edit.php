@@ -1,6 +1,6 @@
-<?php require "logged.php" ?>
+<?php require_once "logged.php" ?>
 <div class="container">
-    <?php require "food.add.php" ?>
+    <?php require_once "food.add.php" ?>
     <div class="container">
         <table class="table table-secondary">
             <thead class="table-primary">
@@ -31,7 +31,7 @@
                             <?= $food->type ?>
                         </td>
                         <td class="text-center">
-                            <button data-toggle="modal" data-target="#editFood <?= $food->id ?>" class="btn  btn-outline-info btn-lg fa fa-edit">
+                            <button data-toggle="modal" data-target="#editFood<?= $food->id ?>" class="btn  btn-outline-info btn-lg fa fa-edit">
                                 Sửa
                             </button>
                             <button data-toggle="modal" data-target="#delete<?= $food->id ?>" class="btn  btn-danger btn-lg far fa-trash-alt">
@@ -45,14 +45,4 @@
         </table>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#datatb tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        })
-    });
-</script>
-<?php require "html/footer.php" ?>
+<?php require_once "html/footer.php" ?>

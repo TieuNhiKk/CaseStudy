@@ -1,5 +1,4 @@
-<?php require !isset($_SESSION['login']) ? "login.sign.php" : "logged.php" ?>
-<?php require "Controllers/page.php" ?>
+<?php require !isset($_SESSION['user']) ? "login.sign.php" : "logged.php" ?>
 <hr>
 <div class="container border px-auto">
     <h1>HOT</h1>

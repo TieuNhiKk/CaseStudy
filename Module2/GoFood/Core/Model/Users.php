@@ -3,6 +3,7 @@
 namespace Core\Model;
 
 use Core\Database\QueryDB;
+use Exception;
 
 class Users
 {
@@ -22,9 +23,20 @@ class Users
 
     public static function signIn($phone, $pass)
     {
-        $login = QueryDB::search('users', "`phone` = '{$phone}' AND `pass` = PASSWORD('{$pass}')");
-
-        return $_SESSION['login'] = $login[0];
+        try {
+            $login = QueryDB::search('users', "`phone` = '{$phone}'");
+            if ($login) {
+                if (password_verify($pass, $login[0]->pass)) {
+                    $sql = "SELECT `id`, `name`, `phone`, `email`, `address`, `access` FROM `users` WHERE `phone` = '{$phone}'";
+                    $_SESSION['user'] = QueryDB::get($sql)[0];
+                    return $_SESSION['user'];
+                }
+                throw new \Exception("Sai mật khẩu");
+            }
+            throw new \Exception("Chưa đăng ký");
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -36,20 +48,21 @@ class Users
 
     public static function signUp($infor)
     {
-        $data = [
-            'name' => "'{$infor[0]}'",
-            // 'avatar' => "'{$infor[1]}'",
-            'phone' => "'{$infor[1]}'",
-            'email' => "'{$infor[2]}'",
-            'address' => "'{$infor[3]}'",
-            'pass' => "PASSWORD('{$infor[4]}')",
-            'access' => '1',
-            'avatar' => "''"
-        ];
-        
-        QueryDB::insert('users', $data);
-
-        return self::signIn($infor[1], $infor[4]);
+        try {
+            $pass = password_hash($infor[4], PASSWORD_BCRYPT);
+            $data = [
+                'name' => "'{$infor[0]}'",
+                'phone' => "'{$infor[1]}'",
+                'email' => "'{$infor[2]}'",
+                'address' => "'{$infor[3]}'",
+                'pass' => "'{$pass}'",
+                'access' => '1'
+            ];
+            QueryDB::insert('users', $data);
+            return self::signIn($infor[1], $infor[4]);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     /**
@@ -62,17 +75,20 @@ class Users
 
     public static function userUpdate($data, $id)
     {
-        $datas = [
-            'name' => "'{$data[0]}'",
-            'avatar' => "'{$data[1]}'",
-            'phone' => "'{$data[2]}'",
-            'email' => "'{$data[3]}'",
-            'address' => "'{$data[4]}'",
-            'pass' => "PASSWORD('{$data[5]}')"
-        ];
-        QueryDB::update('users', $datas, $id);
-
-        return self::signIn($data[2], $data[5]);
+        try {
+            $pass = password_hash($data[4], PASSWORD_BCRYPT);
+            $datas = [
+                'name' => "'{$data[0]}'",
+                'phone' => "'{$data[1]}'",
+                'email' => "'{$data[2]}'",
+                'address' => "'{$data[3]}'",
+                'pass' => "'{$pass}'"
+            ];
+            QueryDB::update('users', $datas, $id);
+            return self::signIn($data[1], $data[4]);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 
     /**
@@ -81,6 +97,10 @@ class Users
 
     public static function signOut()
     {
-        session_destroy();
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        } else {
+            throw new \Exception('Thất bại');
+        }
     }
 }

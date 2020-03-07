@@ -1,122 +1,92 @@
 <?php require "html/nav.php" ?>
-<i class="btn btn-toolbar">
-    <img id='useravatar' src="<?= $_SESSION['login']->avatar != '' ? $_SESSION['login']->avatar : $_SESSION['login']->avatar = 'Public/guest.png' ?>" class="rounded-circle" data-toggle="modal" data-target="#myinfor">
-</i>
+<i class='fas fa-user-circle btn btn-toolbar' data-toggle="modal" style="font-size: 42px ;color:seashell" data-target="#myinfor"></i>
 </div>
-<a href="?admin=1" <?= $_SESSION['login']->access == 2 ? '' : 'hidden' ?> class="btn btn-outline-success btn-group">Admin</a>
+<a href="?admin=1" <?= $_SESSION['user']->access == 2 ? '' : 'hidden' ?> class="btn btn-outline-success btn-group">Admin</a>
 </div>
 </nav>
-<div class="modal fade" id="myinfor">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title text-center">Thông tin</h4>
-                <img src="<?= $_SESSION['login']->avatar ?>" alt="<?= $_SESSION['login']->name ?>" id="useravatar">
-                <button type="button" class="close" data-dismiss="modal">Đóng</button>
-            </div>
-            <div class="modal-body">
-                <!-- name -->
-                <div class="form-group row">
-                    <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Họ và tên</label>
-                    <div class="col-sm-9">
-                        <p><?= ucwords($_SESSION['login']->name) ?></p>
+<div>
+    <div class="modal fade" id="myinfor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title text-center">Thông tin</h4>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Đóng</button>
+                </div>
+                <div class="modal-body bg-sencondary">
+                    <!-- name -->
+                    <div class="row my-2">
+                        <label class="col-4">Họ và tên:</label>
+                        <span class="col-8"><?= ucwords($_SESSION['user']->name) ?></span>
+                    </div>
+                    <!-- phone -->
+                    <div class="row my-2">
+                        <label class="col-4">Số điện thoại:</label>
+                        <span class="col-8"><?= $_SESSION['user']->phone ?></span>
+                    </div>
+                    <!-- email -->
+                    <div class="row my-2">
+                        <label class="col-4">Email:</label>
+                        <span class="col-8"><?= $_SESSION['user']->email ?></span>
+                    </div>
+                    <!-- address -->
+                    <div class="row my-2">
+                        <label class="col-4">Địa chỉ:</label>
+                        <span class="col-8"><?= $_SESSION['user']->address ?></span>
                     </div>
                 </div>
-                <!-- phone -->
-                <div class="form-group row">
-                    <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Số điện thoại</label>
-                    <div class="col-sm-9">
-                        <p><?= $_SESSION['login']->phone ?></p>
-                    </div>
+                <div class="modal-footer row">
+                    <a href="#userUpdate" type="button" class="btn btn-warning col-5" data-toggle="modal" data-dismiss="modal">
+                        <i class="fa fa-user-edit">Sửa</i>
+                    </a>
+                    <form action="logOut" class="col-5" method="post">
+                        <button type="sybmit" class="btn btn-danger">
+                            <i class='fa fa-sign-out-alt'> Đăng xuất</i>
+                        </button>
+                    </form>
                 </div>
-                <!-- email -->
-                <div class="form-group row">
-                    <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
-                    <div class="col-sm-9">
-                        <p><?= $_SESSION['login']->email ?></p>
-                    </div>
-                </div>
-                <!-- address -->
-                <div class="form-group row">
-                    <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Địa chỉ</label>
-                    <div class="col-sm-9">
-                        <p><?= $_SESSION['login']->address ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userUpdate">
-                    <i class='fas fa-user-edit'> Sửa</i>
-                </button>
-                <form action="logOut" method="post">
-                    <button type="sybmit" class="btn btn-danger">
-                        <i class='fas fa-sign-out-alt'>Thoát</i>
-                    </button>
-                </form>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="userUpdate">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="userUpdate" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="userUpdate">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header text-center">
                     <h4 class="modal-title">Chỉnh sửa Thông tin</h4>
-                    <img src="<?= $_SESSION['login']->avatar ?>" alt="<?= $_SESSION['login']->name ?>" id="useravatar">
-                    <button type="button" class="close" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Đóng</button>
                 </div>
-                <input type="hidden" name="id" value="<?= $_SESSION['login']->value ?>">
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Họ và tên</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="name5" class="form-control form-control-sm" placeholder="col-form-label-sm" value="<?= $_SESSION['login']->name ?>">
+                    <form action="userUpdate" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $_SESSION['user']->value ?>">
+                        <div class="row my-2">
+                            <label class="col-3">Họ và tên:</label>
+                            <input type="text" name="name" class="form-control col-9" placeholder="col-form-label-sm" value="<?= $_SESSION['user']->name ?>">
+                            <!-- phone -->
                         </div>
-                    </div>
-                    <!-- avatar -->
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Avatar</label>
-                        <div class="col-sm-8 ml-3">
-                            <input type="file" name="avatar5" accept="image/*" id="inputGroupFile02">
-                            <label class="custom-file-label" for="inputGroupFile02">Chọn ảnh đại diện</label>
+                        <div class="row my-2">
+                            <label class="col-3">Điện thoại:</label>
+                            <input type="tel" name="phone" class="form-control col-9" placeholder="0913721389" value="<?= $_SESSION['user']->phone ?>">
                         </div>
-                    </div>
-                    <!-- phone -->
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Điện thoại</label>
-                        <div class="col-sm-9">
-                            <input type="tel" name="phone5" class="form-control form-control-sm" placeholder="0913721389" value="<?= $_SESSION['login']->phone ?>">
+                        <!-- email -->
+                        <div class="row my-2">
+                            <label class="col-3">Email:</label>
+                            <input type="email" name="email" class="form-control col-9" placeholder="example@gmail.com" value="<?= $_SESSION['user']->email ?>">
                         </div>
-                    </div>
-                    <!-- email -->
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" name="email5" class="form-control form-control-sm" placeholder="example@gmail.com" value="<?= $_SESSION['login']->email ?>">
+                        <!-- address -->
+                        <div class="row my-2">
+                            <label class="col-3">Địa chỉ:</label>
+                            <input type="text" name="address" class="form-control col-9" placeholder="12 Điện Biên Phủ" value="<?= $_SESSION['user']->address ?>">
                         </div>
-                    </div>
-                    <!-- address -->
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Địa chỉ:</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="address5" class="form-control form-control-sm" placeholder="12 Điện Biên Phủ" value="<?= $_SESSION['login']->address ?>">
+                        <!-- Password -->
+                        <div class="row my-2">
+                            <label class="col-3">Mật khẩu:</label>
+                            <input type="password" name="password" class="form-control col-9" placeholder="Mật khẩu" pattern="\w{6,}">
                         </div>
-                    </div>
-                    <!-- Password -->
-                    <div class="form-group row">
-                        <label for="a" class="col-sm-3 col-form-label col-form-label-sm">Mật khẩu</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="password5" class="form-control form-control-sm" placeholder="Mật khẩu" pattern="\w{6,}">
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary w-75 mx-auto btn-block">
+                            <i class='fas fa-save'>Lưu</i>
+                        </button>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class='fas fa-save'>Lưu</i>
-                    </button>
-                </div>
-                <form>
+            </div>
         </div>
     </div>
 </div>
